@@ -158,7 +158,7 @@
 <p><strong><code>&lt;video&gt;</code>标签</strong><br>用来加载视频资源，也是HTML5新支持的标签，和<code>&lt;img&gt;</code>标签类似，可以非常便捷的引入资源。<br>写法大概是：<br><figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">"media/butterfly.mp4"</span> <span class="attr">controls</span>&gt;</span></div><div class="line">	您的浏览器不支持 video 标签。</div><div class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>src是视频的路径，controls表示显示视频播放控件，默认是不显示的。标签之间的文字会出现在不支持video标签的浏览器中，作为后备内容出现，用来兼容不支持video标签的浏览器。具体属性可以查看<a href="http://www.w3school.com.cn/tags/tag_video.asp" target="_blank" rel="external">HTML video标签</a></p>
 <p><strong><code>&lt;audio&gt;</code>标签</strong><br>基本和video属性一致，不再赘述。要了解详细信息可以看：<a href="http://www.w3school.com.cn/tags/tag_audio.asp" target="_blank" rel="external">HTML audio标签</a></p>
-<p><strong><code>&lt;canvas&gt;</code>标签</strong><br>可以用嵌入的脚本来绘制图形，后面讲JS的时候会提到，然后这里就简单贴一段代码，可以看看它是怎么工作的。<br><figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"myCanvas"</span>&gt;</span></div><div class="line">	your browser does not support the canvas tag</div><div class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript">	<span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">'myCanvas'</span>);<span class="comment">//找到canvas标签</span></span></div><div class="line"><span class="javascript">	<span class="keyword">var</span> ctx=canvas.getContext(<span class="string">'2d'</span>);<span class="comment">//制定绘图模式是2d</span></span></div><div class="line"><span class="javascript">	ctx.fillStyle=<span class="string">'#FF0000'</span>;<span class="comment">//填充颜色</span></span></div><div class="line"><span class="javascript">	ctx.fillRect(<span class="number">0</span>,<span class="number">0</span>,<span class="number">80</span>,<span class="number">100</span>);<span class="comment">//绘制长方形，参数是左上角和右下角的坐标</span></span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><strong><code>&lt;canvas&gt;</code>标签</strong><br>可以用嵌入的脚本来绘制图形，后面讲JS的时候会提到，然后这里就简单贴一段代码，可以看看它是怎么工作的。<br><figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"myCanvas"</span>&gt;</span></div><div class="line">	your browser does not support the canvas tag</div><div class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="undefined">	var canvas=document.getElementById('myCanvas');//找到canvas标签</span></div><div class="line"><span class="undefined">	var ctx=canvas.getContext('2d');//制定绘图模式是2d</span></div><div class="line"><span class="undefined">	ctx.fillStyle='#FF0000';//填充颜色</span></div><div class="line"><span class="undefined">	ctx.fillRect(0,0,80,100);//绘制长方形，参数是左上角和右下角的坐标</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>结果如下：<br><img src="http://o6vut8vrh.bkt.clouddn.com/16-8-10/93723471.jpg" alt=""><br>详情：<a href="http://www.w3school.com.cn/tags/tag_canvas.asp" target="_blank" rel="external">HTML canvas标签</a></p>
 <p><strong><code>&lt;map&gt;</code>和<code>&lt;area&gt;</code>标签</strong><br>这两个标签要配合使用，area标签永远嵌套在map标签中，可以用来映射图像区域。<br><figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"http://o6vut8vrh.bkt.clouddn.com/16-8-10/88534460.jpg"</span> <span class="attr">border</span>=<span class="string">"0"</span> <span class="attr">usemap</span>=<span class="string">"#planetmap"</span> <span class="attr">alt</span>=<span class="string">"Planets"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">map</span> <span class="attr">name</span>=<span class="string">"planetmap"</span> <span class="attr">id</span>=<span class="string">"planetmap"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">area</span> <span class="attr">shape</span>=<span class="string">"rect"</span> <span class="attr">coords</span>=<span class="string">"0,0,123,62"</span> <span class="attr">href</span>=<span class="string">"https://www.baidu.com"</span> <span class="attr">target</span> =<span class="string">"_blank"</span> <span class="attr">alt</span>=<span class="string">"Mercury"</span> /&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">area</span> <span class="attr">shape</span>=<span class="string">"circle"</span> <span class="attr">coords</span>=<span class="string">"166,38,30"</span> <span class="attr">href</span> =<span class="string">"https://www.google.com"</span> <span class="attr">target</span> =<span class="string">"_blank"</span> <span class="attr">alt</span>=<span class="string">"Sun"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">map</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>效果可以直接点击试试看：<br><img src="http://o6vut8vrh.bkt.clouddn.com/16-8-10/88534460.jpg" border="0" usemap="#planetmap" alt="Planets"></p>
@@ -214,11 +214,43 @@
             <span id="busuanzi_value_site_uv"></span>UV
         </span>
         Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
-</footer><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</footer>
 
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 </body>
 
 <script>
