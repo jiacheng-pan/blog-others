@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>快慢指针.md | Others | 咸鱼Jackie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在做到leetcode 287题时，遇到了这个问题：  Given an array nums containing n + 1 integers where each integer is between 1 and n (inclusive), prove that at least one duplicate number must exist. Assume that there is o">
+<meta name="keywords" content="leetcode,数据结构,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快慢指针.md">
+<meta property="og:url" content="http://jackieanxis.github.io/2018/06/13/快慢指针/index.html">
+<meta property="og:site_name" content="Others | 咸鱼Jackie">
+<meta property="og:description" content="在做到leetcode 287题时，遇到了这个问题：  Given an array nums containing n + 1 integers where each integer is between 1 and n (inclusive), prove that at least one duplicate number must exist. Assume that there is o">
+<meta property="og:locale" content="Chinese">
+<meta property="og:image" content="http://o6vut8vrh.bkt.clouddn.com/18-6-13/34029455.jpg">
+<meta property="og:updated_time" content="2018-06-14T06:57:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="快慢指针.md">
+<meta name="twitter:description" content="在做到leetcode 287题时，遇到了这个问题：  Given an array nums containing n + 1 integers where each integer is between 1 and n (inclusive), prove that at least one duplicate number must exist. Assume that there is o">
+<meta name="twitter:image" content="http://o6vut8vrh.bkt.clouddn.com/18-6-13/34029455.jpg">
+  
+  
+    <link rel="icon" href="http://o6vut8vrh.bkt.clouddn.com/avatar.png">
+  
+  <link rel="stylesheet" href="/blog-others/css/typing.css">
+  <link rel="stylesheet" href="/blog-others/css/donate.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+</head>
+
+  
+    
+      <body>
+    
+  
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container" class="container">
+        <article id="post-快慢指针" class="article article-type-post" itemscope itemprop="blogPost">
+  <header id="header" class="header">
+    <div class="mobile-nav">
+      <h1 class="nickname">Jackie Anxis</h1>
+      <a id="menu">
+        &#9776; Menu
+      </a>
+    </div>
+    
+        <nav id="main-nav" class="main-nav nav-left">
+    
+    
+      <a class="main-nav-link" href="http://jackieanxis.github.io">Home</a>
+    
+      <a class="main-nav-link" href="http://jackieanxis.github.io/blog-frontend">FrontEnd</a>
+    
+      <a class="main-nav-link" href="http://jackieanxis.github.io/blog-cs229">MLcs229</a>
+    
+      <a class="main-nav-link" href="http://jackieanxis.github.io/blog-papers">PaperReading</a>
+    
+      <a class="main-nav-link" href="https://github.com/JackieAnxis">Github</a>
+    
+      <a class="main-nav-link" href="http://jackieanxis.github.io/blog-others">Others</a>
+    
+      <a class="main-nav-link" href="/blog-others/about">About</a>
+    
+  </nav>
+</header>
+
+  <hr/>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      快慢指针.md
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry typo" itemprop="articleBody">
+      
+        <p>在做到<a href="https://leetcode.com/problems/find-the-duplicate-number/description/" target="_blank" rel="external">leetcode 287题</a>时，遇到了这个问题：</p>
+<blockquote>
+<p>Given an array <em>nums</em> containing <em>n</em> + 1 integers where each integer is between 1 and <em>n</em> (inclusive), prove that at least one duplicate number must exist. Assume that there is only one duplicate number, find the duplicate one.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&gt; Input: [1,3,4,2,2]</div><div class="line">&gt; Output: 2</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&gt; Input: [3,1,3,4,2]</div><div class="line">&gt; Output: 3</div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p><strong>Note:</strong></p>
+<ol>
+<li>You <strong>must not</strong> modify the array (assume the array is read only).</li>
+<li>You must use only constant, <em>O</em>(1) extra space.</li>
+<li>Your runtime complexity should be less than <em>O</em>(<em>n</em>2).</li>
+<li>There is only one duplicate number in the array, but it could be repeated more than once.</li>
+</ol>
+</blockquote>
+<p>看到了快慢指针这个解，最快能达到$O(N)$的时间复杂度，于是详细分析了一下这题。</p>
+<p>一般会用两个指针一起遍历数组，快指针每次移动2步，慢指针每次移动1步。就跟跑步一样，假如在这个链表当中存在环的话，就快指针总是会追上慢指针，这个时候刚好超过慢指针$n$圈，并且快指针跑过的距离刚好是慢指针的两倍。</p>
+<p>我们看图，慢指针从A开始，在B点进入了环中，经过$n$轮后，在C点和快指针相遇了。假设AB的长度是$a$，$BC$的长度是$b$，B的循环的长度是$c$，那么从B点走到C点需要经过$c-b$</p>
+<p><img src="http://o6vut8vrh.bkt.clouddn.com/18-6-13/34029455.jpg" alt=""></p>
+<p>此时，慢指针走过的距离是$a+nc+b​$，快指针假设是$a+Nc+​$b，因为它们速度差是2倍，所以：<br>$$<br>\begin{align}<br>&amp; 2(a+nc+b)=a+Nc+b\\<br>\Rightarrow &amp; a=(N-2n)c-b\\<br>\Rightarrow &amp; a=(N-2n-1)c+c-b\\<br>\Rightarrow &amp; a+xc=(N-2n-1+x)c+c-b<br>\end{align}<br>$$<br>其中，$x$可以是任意大小。</p>
+<p>我们来解释一下上述结论：</p>
+<ol>
+<li>$a+xc$的意义就是，从A点出发，在B点进入循环，并经过$x$圈又回到B点</li>
+<li>$(N-2n-1+x)c+c-b$的意思则是：从C点继续向后走，走过$c-b$的长度后，回到B点，又经过$(N-2n-1+x)$圈回到B点</li>
+<li>上述两者相同的意思是，此时指针又会共同指向B点，那么我们就找到了进入循环的点。</li>
+</ol>
+<p>在题中，我们可以将数组看成一个链表，比如[1,3,4,2,2]可以看成一个$1\rightarrow3\rightarrow2\rightarrow4\rightarrow2\cdots$的链表（数组元素表示该元素指向的下一个元素的下标，如果看不懂，读代码就好）。然后我们就可以发现链表会在重复值那里进入循环，于是找到进入循环的点的时候，就可以找到重复值。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></div><div class="line"><span class="comment"> * @return &#123;number&#125;</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">var</span> findDuplicate = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> slow = nums[<span class="number">0</span>], fast = nums[nums[<span class="number">0</span>]], t = nums[<span class="number">0</span>]</div><div class="line">    <span class="keyword">while</span> (slow != fast) &#123;</div><div class="line">        slow = nums[slow]</div><div class="line">        fast = nums[nums[fast]]</div><div class="line">    &#125;</div><div class="line">    slow = nums[slow]</div><div class="line">    <span class="keyword">while</span> (slow != t) &#123;</div><div class="line">        slow = nums[slow]</div><div class="line">        t = nums[t]</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> slow</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="关于快慢指针的应用"><a href="#关于快慢指针的应用" class="headerlink" title="关于快慢指针的应用"></a>关于快慢指针的应用</h2><ul>
+<li>单向链表是否存在循环：只要快指针和慢指针相遇，则一定存在环</li>
+<li>寻找无环链表的中位数：当快指针指向链尾时，慢指针指向链中</li>
+<li>找链表中环的入口点：如上所述</li>
+<li>两个单向无环链表是否相交：将其中一个链表首尾相连，另一个链表开始进行快慢指针遍历，就转化成了第一个问题</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <ul class="article-meta">
+        <li>
+          <span class="label">Published Date:</span>
+          <a href="/blog-others/2018/06/13/快慢指针/" class="article-date">
+  <time datetime="2018-06-13T12:55:11.000Z" itemprop="datePublished">2018-06-13</time>
+</a>
+
+        </li>
+        
+          <li>
+            <span class="label">Category:</span>
+            
+  <div class="article-category">
+    <a class="article-category-link" href="/blog-others/categories/数据结构和算法/">数据结构和算法</a>
+  </div>
+
+
+          </li>
+        
+        
+          <li>
+            <span class="label">Tag:</span>
+            
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog-others/tags/leetcode/">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog-others/tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog-others/tags/算法/">算法</a></li></ul>
+
+
+          </li>
+        
+        <hr/>
+      </ul>
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav" class="article-nav">
+  
+    <span id="article-nav-newer" class="article-nav-link-wrap newer"></span>
+  
+  
+    <a href="/blog-others/2017/12/16/六级翻译重要词汇/" id="article-nav-older" class="article-nav-link-wrap older">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">六级翻译重要词汇短语</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+
+
+
+
+
+
+      </div>
+      
+    <footer id="footer" class="post-footer footer">
+      
+      <hr/>
+      <div id="footerContent" class="footer-content">
+        <p>nothing</p>
+
+
+      </div>
+    </footer>
+
+      
+
+
+
+
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog-others/fancybox/jquery.fancybox.css">
+  <script src="/blog-others/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/blog-others/js/typing.js"></script>
+<!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+
+
+
+
+
+
+
+    </div>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
