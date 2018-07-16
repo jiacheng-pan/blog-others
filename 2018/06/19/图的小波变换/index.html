@@ -6,7 +6,7 @@
   <title>图的小波变换 | Others | 咸鱼Jackie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="翻译自论文：Wavelet-based Visual Analysis of Dynamic Networks，2017 TVCG  图的傅里叶变换Graph Fourier Transform关于傅里叶变换请看：【转】傅里叶分析之掐死教程（完整版） 关于拉普拉斯矩阵的一些特性可以看我的另一篇博客：拉普拉斯矩阵二分法 假设一个无向正权图$G=(V,E)$，其邻接矩阵表示成$A$，每个元素代表边的">
-<meta name="keywords" content="数学,图可视化,图挖掘">
+<meta name="keywords" content="图可视化,数学,图挖掘">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图的小波变换">
 <meta property="og:url" content="http://jackieanxis.github.io/2018/06/19/图的小波变换/index.html">
@@ -16,7 +16,7 @@
 <meta property="og:image" content="http://o6vut8vrh.bkt.clouddn.com/18-6-19/21849016.jpg">
 <meta property="og:image" content="http://o6vut8vrh.bkt.clouddn.com/2018-06-19-image-20180619231116668.png">
 <meta property="og:image" content="http://o6vut8vrh.bkt.clouddn.com/2018-06-24-124458.png">
-<meta property="og:updated_time" content="2018-06-24T13:09:06.000Z">
+<meta property="og:updated_time" content="2018-06-24T16:06:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图的小波变换">
 <meta name="twitter:description" content="翻译自论文：Wavelet-based Visual Analysis of Dynamic Networks，2017 TVCG  图的傅里叶变换Graph Fourier Transform关于傅里叶变换请看：【转】傅里叶分析之掐死教程（完整版） 关于拉普拉斯矩阵的一些特性可以看我的另一篇博客：拉普拉斯矩阵二分法 假设一个无向正权图$G=(V,E)$，其邻接矩阵表示成$A$，每个元素代表边的">
@@ -100,7 +100,7 @@
 <p>以此类比：</p>
 <p>图的傅里叶变换中，我们将整个图转换成到了特征值上，用不同特征值的权重来表达了整张图，但无法对每个节点生成其特征值分布。</p>
 <p>而通过小波变换，可以获取每个节点上，不同$s$值的分布，也就代表了特征值的分布。</p>
-<p>特征值能够描述图的特性，比如特征值中0的个数表达了图中连通子图的数量，第二小的非零特征值可以用来描述二分最小切割边数量(代数连通度，algebraic connectivity，见另一篇博客<a href="https://jackieanxis.github.io/blog-others/2018/06/19/%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%9F%A9%E9%98%B5%E4%BA%8C%E5%88%86%E6%B3%95/">拉普拉斯矩阵和代数连通度</a>）。</p>
+<p>特征值能够描述图的特性，比如特征值中0的个数表达了图中连通子图的数量，第二小的非零特征值可以用来描述二分最小切割边数量(代数连通度，algebraic connectivity，见另一篇博客<a href="https://jackieanxis.github.io/blog-others/2018/06/19/%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%9F%A9%E9%98%B5%E5%92%8C%E4%BB%A3%E6%95%B0%E8%BF%9E%E9%80%9A%E5%BA%A6/">拉普拉斯矩阵和代数连通度</a>）。</p>
 <p>小的特征值（对应大的$s$）对全局的描述更强一些，大的特征值则对局部的描述更详细一些。</p>
 <p>通过对$s$的值进行采样，我们可以得到一组$s_{min}=s_1,s_2,\ldots,s_r=s_{max}$，一般会取$s_{min}=2/\lambda_n, s_{max}=40/\lambda_n$，对应的$g(sx)$则被称为小波核（wavelet kernels）,生成的$W_f(s, j)$则被称为小波系数（wavelet coefficients）。</p>
 <h4 id="缩放函数-Scaling-function"><a href="#缩放函数-Scaling-function" class="headerlink" title="缩放函数 Scaling function"></a>缩放函数 Scaling function</h4><p>缩放函数（$h(x)$）可以用来生成缩放函数系数（$S_f(j)$）是一种用来稳定的表达低频的傅里叶模式（Fourier modes，也就是相对较小的特征值）的方法。一般会跟上述的小波变换产生的wavelet coefficients，$W_f(s_1, j), W_f(s_2, j), \ldots, W_f(s_r,j)$组合，当成wavelet coeffients，其中这个缩放函数（scaling function）则用于表达低频的傅里叶模式：${S_f(j), W_f(s_r, j), \ldots, W_f(s_1,j)}$</p>
@@ -108,7 +108,7 @@
 <h3 id="小波系数的解释"><a href="#小波系数的解释" class="headerlink" title="小波系数的解释"></a>小波系数的解释</h3><p>小波系数可以解释成在特定频率的原始信号的能量。传统的小波变换中，高频区域对邻域的表达更好一些，所以相邻点之间在高频区域会有较大的差别，但在低频区域的差别更平滑。在网络（或者说图）中，也是一样的。</p>
 <p>图的小波变换，能够为每个节点生成一组系数，代表了不同频率的能量。如下图所示，小波变换系数的分布更为平滑的节点，往往是低频节点（指的是低频率的小波系数更为突出的节点，图中浅绿色的节点），而反之，则是高频节点（高频系数更为突出，图中深绿色节点），小波系数分布不是很平滑，相邻的小波系数之间差距可能会较大。</p>
 <p><img src="http://o6vut8vrh.bkt.clouddn.com/2018-06-24-124458.png" alt="image-20180624204457467"></p>
-<p>（PS：论文中，并没有说明这个信号强表达的意思，这里我猜测，度数较高的节点等于信号较强的节点）</p>
+<p>（PS：这里我猜测，度数较高的节点等于信号较强的节点，这个节点信号，可以人为的定义，比如在它的场景分析中，某个区域的出租车载客数量则被定义成了该区域节点的信号，可以应用于函数$f$）</p>
 
       
     </div>
@@ -149,19 +149,19 @@
     
 <nav id="article-nav" class="article-nav">
   
-    <a href="/blog-others/2018/06/19/拉普拉斯矩阵和代数连通度/" id="article-nav-newer" class="article-nav-link-wrap newer">
+    <a href="/blog-others/2018/06/19/傅里叶分析/" id="article-nav-newer" class="article-nav-link-wrap newer">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          拉普拉斯矩阵和代数连通度
+          【转】傅里叶分析之掐死教程（完整版）
         
       </div>
     </a>
   
   
-    <a href="/blog-others/2018/06/19/傅里叶分析/" id="article-nav-older" class="article-nav-link-wrap older">
+    <a href="/blog-others/2018/06/13/快慢指针/" id="article-nav-older" class="article-nav-link-wrap older">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">【转】傅里叶分析之掐死教程（完整版）</div>
+      <div class="article-nav-title">快慢指针</div>
     </a>
   
 </nav>
