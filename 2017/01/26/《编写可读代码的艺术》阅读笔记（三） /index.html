@@ -13,15 +13,15 @@
 <meta property="og:site_name" content="Others | 咸鱼Jackie">
 <meta property="og:description" content="Dustin Boswell的神书，教你如何写出好代码">
 <meta property="og:locale" content="Chinese">
-<meta property="og:image" content="http://o6vut8vrh.bkt.clouddn.com/17-1-27/76690189-file_1485499018366_468c.png">
-<meta property="og:updated_time" content="2017-08-26T03:40:08.000Z">
+<meta property="og:image" content="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/17-1-27/76690189-file_1485499018366_468c.png">
+<meta property="og:updated_time" content="2018-11-30T03:02:51.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《编写可读代码的艺术》阅读笔记（三）">
 <meta name="twitter:description" content="Dustin Boswell的神书，教你如何写出好代码">
-<meta name="twitter:image" content="http://o6vut8vrh.bkt.clouddn.com/17-1-27/76690189-file_1485499018366_468c.png">
+<meta name="twitter:image" content="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/17-1-27/76690189-file_1485499018366_468c.png">
   
   
-    <link rel="icon" href="http://o6vut8vrh.bkt.clouddn.com/avatar.png">
+    <link rel="icon" href="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/avatar.png">
   
   <link rel="stylesheet" href="/blog-others/css/typing.css">
   <link rel="stylesheet" href="/blog-others/css/donate.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
@@ -115,7 +115,7 @@
 <li>写出与描述所匹配的代码</li>
 </ol>
 </blockquote>
-<h3 id="清楚描述逻辑"><a href="#清楚描述逻辑" class="headerlink" title="清楚描述逻辑"></a>清楚描述逻辑</h3><p>在写代码之前，先清晰的描述（写）出你的逻辑，再进行coding，这样有助于你写出更好的代码。<br>这不就是传说中的“小黄鸭debug术”吗！<br><img src="http://o6vut8vrh.bkt.clouddn.com/17-1-27/76690189-file_1485499018366_468c.png" alt=""><br>下面这个例子就说明了如何用清晰的逻辑重构代码：<br><figure class="highlight php"><table><tr><td class="code"><pre><div class="line">$is_admin = is_admin_request();</div><div class="line"><span class="keyword">if</span> ($document) &#123;</div><div class="line">	<span class="keyword">if</span> (!$is_admin &amp;&amp; ($document[<span class="string">'username'</span>] != $_SESSION[<span class="string">'username'</span>])) &#123;</div><div class="line">		<span class="keyword">return</span> not_authorized();</div><div class="line">	&#125;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	<span class="keyword">if</span> (!$is_admin) &#123;</div><div class="line">		<span class="keyword">return</span> not_authorized();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// continue rendering the page ..</span></div></pre></td></tr></table></figure></p>
+<h3 id="清楚描述逻辑"><a href="#清楚描述逻辑" class="headerlink" title="清楚描述逻辑"></a>清楚描述逻辑</h3><p>在写代码之前，先清晰的描述（写）出你的逻辑，再进行coding，这样有助于你写出更好的代码。<br>这不就是传说中的“小黄鸭debug术”吗！<br><img src="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/17-1-27/76690189-file_1485499018366_468c.png" alt=""><br>下面这个例子就说明了如何用清晰的逻辑重构代码：<br><figure class="highlight php"><table><tr><td class="code"><pre><div class="line">$is_admin = is_admin_request();</div><div class="line"><span class="keyword">if</span> ($document) &#123;</div><div class="line">	<span class="keyword">if</span> (!$is_admin &amp;&amp; ($document[<span class="string">'username'</span>] != $_SESSION[<span class="string">'username'</span>])) &#123;</div><div class="line">		<span class="keyword">return</span> not_authorized();</div><div class="line">	&#125;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	<span class="keyword">if</span> (!$is_admin) &#123;</div><div class="line">		<span class="keyword">return</span> not_authorized();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// continue rendering the page ..</span></div></pre></td></tr></table></figure></p>
 <p>可以将上述逻辑表述为：<br><figure class="highlight js"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 以下两种情况之一，你就能获得授权：</span></div><div class="line"><span class="comment">// 1. 你是管理员</span></div><div class="line"><span class="comment">// 2. 你拥有当前文档（如果有当前文档的话）</span></div><div class="line"><span class="comment">// 否则，无法授权与你</span></div></pre></td></tr></table></figure></p>
 <p>于是，代码可以重构为：<br><figure class="highlight php"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> (is_admin_request()) &#123;</div><div class="line">	<span class="comment">// authorized</span></div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> ($document &amp;&amp; ($document[<span class="string">'username'</span>] == $_SESSION[<span class="string">'username'</span>])) &#123;</div><div class="line">	<span class="comment">// authorized</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	<span class="keyword">return</span> not_authorized();</div><div class="line">&#125;</div><div class="line"><span class="comment">// continue rendering the page ...</span></div></pre></td></tr></table></figure></p>
 <h2 id="三、少写代码"><a href="#三、少写代码" class="headerlink" title="三、少写代码"></a>三、少写代码</h2><blockquote>
@@ -143,7 +143,7 @@
         </li>
         
           <li>
-            <span class="label">Categoría:</span>
+            <span class="label">Category:</span>
             
   <div class="article-category">
     <a class="article-category-link" href="/blog-others/categories/如何编写可读代码/">如何编写可读代码</a>
@@ -170,7 +170,7 @@
 <nav id="article-nav" class="article-nav">
   
     <a href="/blog-others/2017/08/07/《软技能》生产力篇阅读笔记/" id="article-nav-newer" class="article-nav-link-wrap newer">
-      <strong class="article-nav-caption">Nuevo</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           《软技能》生产力篇阅读笔记
@@ -180,7 +180,7 @@
   
   
     <a href="/blog-others/2017/01/26/《编写可读代码的艺术》阅读笔记（二）/" id="article-nav-older" class="article-nav-link-wrap older">
-      <strong class="article-nav-caption">Viejo</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">《编写可读代码的艺术》阅读笔记（二）</div>
     </a>
   
