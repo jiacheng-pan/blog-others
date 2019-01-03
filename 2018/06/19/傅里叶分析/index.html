@@ -30,16 +30,16 @@
 <meta property="og:image" content="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103100025377.png">
 <meta property="og:image" content="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103100035862.png">
 <meta property="og:image" content="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103100050393.png">
-<meta property="og:image" content="https://pic3.zhimg.com/80/a185be412974fd73a7925cf1f1cc5372_hd.jpg">
-<meta property="og:image" content="https://pic3.zhimg.com/80/ece53f825c6de629befba3de12f929a7_hd.jpg">
-<meta property="og:image" content="https://pic2.zhimg.com/80/42e1f6dc43e8868b4962f5ba389a5df4_hd.jpg">
-<meta property="og:image" content="https://pic1.zhimg.com/80/3e88e9463e4667e50ebdda51dee88358_hd.jpg">
-<meta property="og:image" content="https://pic4.zhimg.com/80/974efc6a99e06dcd623193e960ccbe93_hd.jpg">
-<meta property="og:image" content="https://pic1.zhimg.com/80/c2d7bfc819ebcbea8d6f2c8271d4791d_hd.jpg">
+<meta property="og:image" content="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103123022065.png">
+<meta property="og:image" content="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103123030296.png">
+<meta property="og:image" content="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103123039569.png">
+<meta property="og:image" content="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103123046729.png">
+<meta property="og:image" content="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103123058098.png">
+<meta property="og:image" content="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103123107601.png">
 <meta property="og:image" content="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103101451033.png">
 <meta property="og:image" content="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103101458758.png">
 <meta property="og:image" content="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103101506672.png">
-<meta property="og:updated_time" content="2019-01-03T02:21:24.776Z">
+<meta property="og:updated_time" content="2019-01-03T04:31:39.972Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【转】傅里叶分析之掐死教程（完整版）">
 <meta name="twitter:description" content="作 者：韩 昊 知 乎：Heinrich 微 博：@花生油工人 知乎专栏：与时间无关的故事 谨以此文献给大连海事大学的吴楠老师，柳晓鸣老师，王新年老师以及张晶泊老师。 转载的同学请保留上面这句话，谢谢。如果还能保留文章来源就更感激不尽了。 文章来源：https://zhuanlan.zhihu.com/p/19763358  ——更新于2014.6.6，想直接看更新的同学可以直接跳到第四章———">
@@ -221,23 +221,23 @@
 <p>因此在傅里叶变换在频域上就从离散谱变成了连续谱。那么连续谱是什么样子呢？</p>
 <p><strong>你见过大海么？</strong></p>
 <p>为了方便大家对比，我们这次从另一个角度来看频谱，还是傅里叶级数中用到最多的那幅图，我们从频率较高的方向看。</p>
-<p><img src="https://pic3.zhimg.com/80/a185be412974fd73a7925cf1f1cc5372_hd.jpg" alt="img"></p>
+<p><img src="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103123022065.png" alt="image-20190103123022065"></p>
 <p>以上是离散谱，那么连续谱是什么样子呢？</p>
 <p>尽情的发挥你的想象，想象这些离散的正弦波离得越来越近，逐渐变得连续……</p>
 <p>直到变得像波涛起伏的大海：</p>
-<p><img src="https://pic3.zhimg.com/80/ece53f825c6de629befba3de12f929a7_hd.jpg" alt="img"></p>
+<p><img src="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103123030296.png" alt="image-20190103123030296"></p>
 <p>很抱歉，为了能让这些波浪更清晰的看到，我没有选用正确的计算参数，而是选择了一些让图片更美观的参数，不然这图看起来就像屎一样了。</p>
 <p>不过通过这样两幅图去比较，大家应该可以理解如何从离散谱变成了连续谱的了吧？原来离散谱的叠加，变成了连续谱的累积。所以在计算上也从求和符号变成了积分符号。</p>
 <p>不过，这个故事还没有讲完，接下去，我保证让你看到一幅比上图更美丽壮观的图片，但是这里需要介绍到一个数学工具才能然故事继续，这个工具就是——</p>
 <h2 id="五、宇宙耍帅第一公式：欧拉公式"><a href="#五、宇宙耍帅第一公式：欧拉公式" class="headerlink" title="五、宇宙耍帅第一公式：欧拉公式"></a>五、宇宙耍帅第一公式：欧拉公式</h2><p>虚数$i$这个概念大家在高中就接触过，但那时我们只知道它是-1的平方根，可是它真正的意义是什么呢?</p>
-<p><img src="https://pic2.zhimg.com/80/42e1f6dc43e8868b4962f5ba389a5df4_hd.jpg" alt="img"></p>
+<p><img src="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103123039569.png" alt="image-20190103123039569"></p>
 <p>这里有一条数轴，在数轴上有一个红色的线段，它的长度是1。当它乘以3的时候，它的长度发生了变化，变成了蓝色的线段，而当它乘以-1的时候，就变成了绿色的线段，或者说线段在数轴上围绕原点旋转了180度。</p>
 <p>我们知道乘-1其实就是乘了两次$i$使线段旋转了180度，那么乘一次$i$呢——答案很简单——旋转了90度。</p>
-<p><img src="https://pic1.zhimg.com/80/3e88e9463e4667e50ebdda51dee88358_hd.jpg" alt="img"></p>
+<p><img src="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103123046729.png" alt="image-20190103123046729"></p>
 <p>同时，我们获得了一个垂直的虚数轴。实数轴与虚数轴共同构成了一个复数的平面，也称复平面。这样我们就了解到，乘虚数i的一个功能——旋转。</p>
 <p>现在，就有请宇宙第一耍帅公式欧拉公式隆重登场——<br>$$<br>e^{ix}=cosx+isinx<br>$$<br>这个公式在数学领域的意义要远大于傅里叶分析，但是称它为宇宙第一耍帅公式是因为它的特殊形式——当x等于$\pi$的时候。<br>$$<br>e^{i\pi}+1=0<br>$$<br>经常有理工科的学生为了跟妹子表现自己的学术功底，用这个公式来给妹子解释数学之美：”石榴姐你看，这个公式里既有自然底数e，自然数1和0，虚数$i$还有圆周率$\pi$，它是这么简洁，这么美丽啊！“但是姑娘们心里往往只有一句话：”臭屌丝……“</p>
 <p>这个公式关键的作用，是将正弦波统一成了简单的指数形式。我们来看看图像上的涵义：</p>
-<p><img src="https://pic4.zhimg.com/80/974efc6a99e06dcd623193e960ccbe93_hd.jpg" alt="img"></p>
+<p><img src="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103123058098.png" alt="image-20190103123058098"></p>
 <p>欧拉公式所描绘的，是一个随着时间变化，在复平面上做圆周运动的点，随着时间的改变，在时间轴上就成了一条螺旋线。如果只看它的实数部分，也就是螺旋线在左侧的投影，就是一个最基础的余弦函数。而右侧的投影则是一个正弦函数。</p>
 <p>关于复数更深的理解，大家可以参考：</p>
 <p><a href="http://www.zhihu.com/question/23234701/answer/26017000" target="_blank" rel="external">复数的物理意义是什么？</a></p>
@@ -245,7 +245,7 @@
 <h2 id="六、指数形式的傅里叶变换"><a href="#六、指数形式的傅里叶变换" class="headerlink" title="六、指数形式的傅里叶变换"></a><strong>六、指数形式的傅里叶变换</strong></h2><p>有了欧拉公式的帮助，我们便知道：<strong>正弦波的叠加</strong>，也可以理解为<strong>螺旋线的叠加</strong>在实数空间的投影。而螺旋线的叠加如果用一个形象的栗子来理解是什么呢？</p>
 <p><strong>光波</strong></p>
 <p>高中时我们就学过，自然光是由不同颜色的光叠加而成的，而最著名的实验就是牛顿师傅的三棱镜实验：</p>
-<p><img src="https://pic1.zhimg.com/80/c2d7bfc819ebcbea8d6f2c8271d4791d_hd.jpg" alt="img"></p>
+<p><img src="http://jackie-image.oss-cn-hangzhou.aliyuncs.com/20190103/image-20190103123107601.png" alt="image-20190103123107601"></p>
 <p>所以其实我们在很早就接触到了光的频谱，只是并没有了解频谱更重要的意义。</p>
 <p>但不同的是，傅里叶变换出来的频谱不仅仅是可见光这样频率范围有限的叠加，而是频率从0到无穷所有频率的组合。</p>
 <p>这里，我们可以用两种方法来理解正弦波：</p>
