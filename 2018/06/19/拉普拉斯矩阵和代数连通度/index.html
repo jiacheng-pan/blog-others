@@ -52,7 +52,7 @@
         <nav id="main-nav" class="main-nav nav-left">
     
     
-      <a class="main-nav-link" href="https://jackieanxis.github.io/">Home</a>
+      <a class="main-nav-link" href="https://jiacheng-pan.github.io/">Home</a>
     
       <a class="main-nav-link" href="https://jiacheng-pan.github.io/blog-frontend/">FrontEnd</a>
     
@@ -166,19 +166,19 @@
     
 <nav id="article-nav" class="article-nav">
   
-    <a href="/blog-others/2018/06/19/傅里叶分析/" id="article-nav-newer" class="article-nav-link-wrap newer">
+    <a href="/blog-others/2018/06/19/图的小波变换/" id="article-nav-newer" class="article-nav-link-wrap newer">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          【转】傅里叶分析之掐死教程（完整版）
+          图的小波变换
         
       </div>
     </a>
   
   
-    <a href="/blog-others/2018/06/19/图的小波变换/" id="article-nav-older" class="article-nav-link-wrap older">
+    <a href="/blog-others/2018/06/19/傅里叶分析/" id="article-nav-older" class="article-nav-link-wrap older">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">图的小波变换</div>
+      <div class="article-nav-title">【转】傅里叶分析之掐死教程（完整版）</div>
     </a>
   
 </nav>
@@ -229,7 +229,22 @@
 
 
 
-    </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+    </div>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>
@@ -247,5 +262,5 @@
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-  </body>
+</body>
 </html>
